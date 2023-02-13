@@ -34,7 +34,6 @@ export const StateContextProvider = ({ children }) => {
         new Date(form.deadline).getTime(), // deadline
         form.image,
       ]);
-      console.log("contract call success", data);
     } catch (error) {
       console.log("contract call failer", error);
     }
@@ -52,7 +51,6 @@ export const StateContextProvider = ({ children }) => {
       image: campaign.image,
       pId: i
     }));
-    console.log("parsedCampaigns", parsedCampaigns);
     return parsedCampaigns;
   }
 

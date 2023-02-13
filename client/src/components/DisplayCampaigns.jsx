@@ -2,7 +2,9 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { loader } from "../assets"
 import FundCard from './FundCard'
-const DisplayCampaigns = ({ isLoading, campaigns, title }) => {
+import { useFetchContext } from "../provider/UseFetchProvider"
+const DisplayCampaigns = ({ title }) => {
+    const { isLoading,campaigns } = useFetchContext()
     const navigate = useNavigate()
     const handleNavigate = (campaign) => {
         navigate(`/campaign-details/${campaign.title}`, { state: campaign })
