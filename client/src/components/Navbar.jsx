@@ -1,30 +1,43 @@
 import { navlinks } from "../constants";
-import { CustomButton } from "./index";
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { CustomButton } from "./index";
 
 import { logo, menu, search, thirdweb } from "../assets";
 import { useStateContext } from "../context"
+import { useFetchContext } from "../provider/UseFetchProvider";
+
 const Navbar = () => {
+
+  const { searchFilter, isSearchPanelOpen, campaigns } = useFetchContext()
   const navigate = useNavigate();
   const { address, connect } = useStateContext()
   const [isActive, setSsActive] = useState("dashboard");
   const [toggleDrawer, setToggleDrawer] = useState(false);
+
   return (
     <div className="flex md:flex-row flex-col-reverse justify-between mb-[35px] gap-6">
-      <div className="lg:flex-1 flex flex-row max-w-[458px] py-2 pl-4 pr-2 h-[52px] bg-[#1c1c24] rounded-[100px]">
-        <input
-          type="text"
-          placeholder="search for campaigns"
-          className="flex w-full font-epilogue font-normal text-[14px] placeholder:text-[#4b5264] text-white bg-transparent outline-none"
-        />
-        <div className="w-[72px] h-full rounded-[20px] bg-[#4acd8d] flex justify-center items-center cursor-pointer">
-          <img
-            src={search}
-            alt="searce"
-            className="w-[15px] h-[15px] object-contain"
+      <div className="w-full flex-1 relative">
+        <div className="lg:flex-1 flex flex-row max-w-[458px] py-2 pl-4 pr-2 h-[52px] bg-[#1c1c24] rounded-[100px]">
+          <input
+            autoComplete="off"
+            onChange={(e) => {
+              searchFilter(e.target.value)
+            }}
+            name="name"
+            tabIndex={0}
+            type="text"
+            placeholder="search for campaigns"
+            className="flex w-full font-epilogue font-normal text-[14px] placeholder:text-[#4b5264] text-white bg-transparent outline-none"
           />
+          <div className="w-[72px] h-full rounded-[20px] bg-[#4acd8d] flex justify-center items-center cursor-pointer">
+            <img
+              src={search}
+              alt="searce"
+              className="w-[15px] h-[15px] object-contain"
+            />
+          </div>
         </div>
       </div>
       <div className="sm:flex hidden flex-row justify-end gap-4">

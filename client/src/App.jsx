@@ -1,13 +1,9 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 
 import { Route, Routes } from "react-router-dom";
 import { Navbar, Sidebar } from "./components";
-
 import { Home, Profile, CampaignDetails, CreateCampaign } from "./pages";
 const App = () => {
-  {
-    /* YT : 3:21:45  */
-  }
   return (
     <div className="relative sm:p-8 p-4 bg-[#13131a] min-h-screen flex flex-row">
       <div className="sm:flex hidden mr-10 relative">
