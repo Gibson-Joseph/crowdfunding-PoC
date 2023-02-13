@@ -11,7 +11,11 @@ const Profile = () => {
     if (contract) fetchFilterCampaigns();
   }, [address, contract])
   return (
-    <DisplayCampaigns title="All Campaigns" />
+    <>
+      <h1 className='flex justify-center w-full font-epilogue text-white text-[18px]'>Wallet Connected!</h1>
+      <div className='flex py-2 w-full justify-center mb-4'><h1 className='font-epilogue font-semibold text-[16px] text-white text-left'>Wallet Address :</h1> <span className='font-epilogue font-normal text-[#818183] ml-2'>{address}</span></div>
+      <DisplayCampaigns title="All Campaigns" />
+    </>
   )
 }
 
