@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useStateContext } from "../context";
 import { CustomButton, CountBox, Loader } from "../components";
 import { calculateBarPercentage, daysLeft } from "../utils";
-import { thirdweb, multiDonator } from "../assets";
+import { multiDonator, donator } from "../assets";
 
 const CampaignDetails = () => {
   const { state } = useLocation();
@@ -75,14 +75,17 @@ const CampaignDetails = () => {
             <div className="mt-[20px] flex flex-row items-center flex-wrap gap-[14px]">
               <div className="w-[52px] h-[52px] flex items-center justify-center rounded-full bg-[#2c2f3d] cursor-pointer">
                 <img
-                  src={thirdweb}
-                  alt="thirdweb"
+                  src={donator}
+                  alt="Donator"
                   className="w-[60%] h-[60%] object-contain"
                 />
               </div>
               <div>
                 <h4 className="font-epilogue font-semibold text-[14px] text-white break-all">
-                  {state.owner}
+                  Creator address :{" "}
+                  <span className="font-epilogue  font-semibold text-[#818183] ml-2 truncate whitespace-pre-wrap">
+                    {state.owner}
+                  </span>
                 </h4>
               </div>
             </div>
