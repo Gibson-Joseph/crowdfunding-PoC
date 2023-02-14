@@ -2,14 +2,15 @@ import { navlinks } from "../constants";
 
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDisconnect } from "@thirdweb-dev/react"
 import { CustomButton } from "./index";
 
-import { logo, menu, search, thirdweb } from "../assets";
+import { logo, menu, search, thirdweb, logout } from "../assets";
 import { useStateContext } from "../context"
 import { useFetchContext } from "../provider/UseFetchProvider";
 
 const Navbar = () => {
-
+  const disconnect = useDisconnect()
   const { searchFilter, isSearchPanelOpen, campaigns } = useFetchContext()
   const navigate = useNavigate();
   const { address, connect } = useStateContext()
@@ -50,15 +51,14 @@ const Navbar = () => {
             else connect();
           }}
         />
-        <Link to="/profile">
-          <div className="w-[52px] h-[52px] rounded-full bg-[#2c2f32] flex justify-center items-center cursor-pointer">
-            <img
-              src={thirdweb}
-              alt="user"
-              className="w-[60%] h-[60%] object-contain"
-            />
-          </div>
-        </Link>
+        {address && <div className="w-[42px] mt-1 h-[42px] rounded-full bg-[#2c2f32] flex justify-center items-center cursor-pointer">
+          <img
+            onClick={disconnect}
+            src={logout}
+            alt="logout"
+            className="w-[60%] h-[60%] object-contain"
+          />
+        </div>}
       </div>
       {/* Small screen navigation */}
       <div className="sm:hidden flex justify-between items-center relative">
@@ -106,7 +106,7 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-          <div className="flex mx-4">
+          <div className="flex mx-4 justify-between">
             <CustomButton
               btnType="button"
               title={address ? "Create a campaign" : "Connect"}
@@ -116,6 +116,14 @@ const Navbar = () => {
                 else connect();
               }}
             />
+            {address && <div className="w-[42px] mt-1 h-[42px] rounded-full bg-[#2c2f32] flex justify-center items-center cursor-pointer">
+              <img
+                onClick={disconnect}
+                src={logout}
+                alt="logout"
+                className="w-[60%] h-[60%] object-contain"
+              />
+            </div>}
           </div>
         </div>
       </div>
