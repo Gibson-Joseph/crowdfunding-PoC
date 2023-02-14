@@ -4,11 +4,11 @@ import { ethers } from "ethers"; // intreact to smartcontracts
 import { money } from "../assets";
 import { CustomButton, FormField, Loader } from "../components";
 import { checkIfImage } from "../utils";
-import { useStateContext } from "../context"
+import { useStateContext } from "../context";
 const CreateCampaign = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const { createCampaign } = useStateContext()
+  const { createCampaign } = useStateContext();
   const [form, setForm] = useState({
     name: "",
     title: "",
@@ -19,8 +19,8 @@ const CreateCampaign = () => {
   });
 
   const handleFormFieldChange = (fieldName, e) => {
-    setForm({ ...form, [fieldName]: e.target.value })
-  }
+    setForm({ ...form, [fieldName]: e.target.value });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,14 +28,17 @@ const CreateCampaign = () => {
     checkIfImage(form.image, async (exists) => {
       if (exists) {
         setIsLoading(true);
-        await createCampaign({ ...form, target: ethers.utils.parseUnits(form.target, 18) }) // ( YT: 2:04:20)
-        setIsLoading(false)
-        navigate("/")
+        await createCampaign({
+          ...form,
+          target: ethers.utils.parseUnits(form.target, 18),
+        }); // ( YT: 2:04:20)
+        setIsLoading(false);
+        navigate("/");
       } else {
-        alert("Provide valid image URL")
-        setForm({ ...form, image: "" })
+        alert("Provide valid image URL");
+        setForm({ ...form, image: "" });
       }
-    })
+    });
   };
 
   return (
@@ -53,7 +56,7 @@ const CreateCampaign = () => {
         <div className="flex flex-wrap gap-[40px]">
           <FormField
             lableName="Your Name *"
-            placeholder="Gibson"
+            placeholder="Enter Name"
             inputType="text"
             value={form.name}
             handleChange={(e) => handleFormFieldChange("name", e)} // check e
@@ -75,8 +78,14 @@ const CreateCampaign = () => {
         />
 
         <div className="w-full flex justify-start items-center p-4 bg-[#8c6dfd] h-[120px] rounded-[10px]">
-          <img src={money} alt="money" className="w-[40px] h-[40px] object-contain" />
-          <h4 className="font-epilogue font-bold text-[25px] text-white ml-[20px]">You will get 100% of the raised amount</h4>
+          <img
+            src={money}
+            alt="money"
+            className="w-[40px] h-[40px] object-contain"
+          />
+          <h4 className="font-epilogue font-bold text-[25px] text-white ml-[20px]">
+            You will get 100% of the raised amount
+          </h4>
         </div>
         <div className="flex flex-wrap gap-[40px]">
           <FormField
@@ -102,7 +111,11 @@ const CreateCampaign = () => {
           handleChange={(e) => handleFormFieldChange("image", e)}
         />
         <div className="flex justify-center items-center mt-[40px]">
-          <CustomButton btyType="submit" title="Submit new campaign" styles="bg-[#1dc071]" />
+          <CustomButton
+            btyType="submit"
+            title="Submit new campaign"
+            styles="bg-[#1dc071]"
+          />
         </div>
       </form>
     </div>
