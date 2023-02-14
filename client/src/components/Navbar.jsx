@@ -1,16 +1,17 @@
 import { navlinks } from "../constants";
 
 import React, { useEffect, useRef, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useDisconnect } from "@thirdweb-dev/react"
 import { CustomButton } from "./index";
 
-import { logo, menu, search, thirdweb } from "../assets";
-import { useStateContext } from "../context";
+import { logo, menu, search, thirdweb, logout } from "../assets";
+import { useStateContext } from "../context"
 import { useFetchContext } from "../provider/UseFetchProvider";
 
 const Navbar = () => {
-  const { searchFilter, isSearchPanelOpen, campaigns, setcampaigns } =
-    useFetchContext();
+  const disconnect = useDisconnect()
+  const { searchFilter, isSearchPanelOpen, campaigns } = useFetchContext()
   const navigate = useNavigate();
   const { address, connect } = useStateContext();
   const [isActive, setSsActive] = useState("dashboard");
@@ -53,15 +54,14 @@ const Navbar = () => {
             else connect();
           }}
         />
-        <Link to="/profile">
-          <div className="w-[52px] h-[52px] rounded-full bg-[#2c2f32] flex justify-center items-center cursor-pointer">
-            <img
-              src={thirdweb}
-              alt="user"
-              className="w-[60%] h-[60%] object-contain"
-            />
-          </div>
-        </Link>
+        {address && <div className="w-[42px] mt-1 h-[42px] rounded-full bg-[#2c2f32] flex justify-center items-center cursor-pointer">
+          <img
+            onClick={disconnect}
+            src={logout}
+            alt="logout"
+            className="w-[60%] h-[60%] object-contain"
+          />
+        </div>}
       </div>
       {/* Small screen navigation */}
       <div className="sm:hidden flex justify-between items-center relative">
@@ -79,17 +79,15 @@ const Navbar = () => {
           onClick={() => setToggleDrawer(!toggleDrawer)}
         />
         <div
-          className={`absolute top-[60px] right-0 left-0 bg-[#1c1c24] z-10 shadow-secondary py-4 ${
-            !toggleDrawer ? "-translate-y-[150vh]" : "translate-y-0"
-          }  translate-all duration-700`}
+          className={`absolute top-[60px] right-0 left-0 bg-[#1c1c24] z-10 shadow-secondary py-4 ${!toggleDrawer ? "-translate-y-[150vh]" : "translate-y-0"
+            }  translate-all duration-700`}
         >
           <ul className="mb-4">
             {navlinks.map((link) => (
               <li
                 key={link.name}
-                className={`flex p-4 ${
-                  isActive === link.name && "bg-[#3a3a43]"
-                }`}
+                className={`flex p-4 ${isActive === link.name && "bg-[#3a3a43]"
+                  }`}
                 onClick={() => {
                   setSsActive(link.name);
                   setToggleDrawer(false);
@@ -99,21 +97,19 @@ const Navbar = () => {
                 <img
                   src={link.imgUrl}
                   alt={link.name}
-                  className={`h-[24px] w-[24px] object-contain ${
-                    isActive === link.name ? "grayscale-0" : "grayscale"
-                  }`}
+                  className={`h-[24px] w-[24px] object-contain ${isActive === link.name ? "grayscale-0" : "grayscale"
+                    }`}
                 />
                 <p
-                  className={`ml-[20px] font-epilogue font-semibold text-[14px] ${
-                    isActive === link.name ? "text-[#1dc071]" : "text-[#808191]"
-                  }`}
+                  className={`ml-[20px] font-epilogue font-semibold text-[14px] ${isActive === link.name ? "text-[#1dc071]" : "text-[#808191]"
+                    }`}
                 >
                   {link.name}
                 </p>
               </li>
             ))}
           </ul>
-          <div className="flex mx-4">
+          <div className="flex mx-4 justify-between">
             <CustomButton
               btnType="button"
               title={address ? "Create a campaign" : "Connect"}
@@ -123,6 +119,14 @@ const Navbar = () => {
                 else connect();
               }}
             />
+            {address && <div className="w-[42px] mt-1 h-[42px] rounded-full bg-[#2c2f32] flex justify-center items-center cursor-pointer">
+              <img
+                onClick={disconnect}
+                src={logout}
+                alt="logout"
+                className="w-[60%] h-[60%] object-contain"
+              />
+            </div>}
           </div>
         </div>
       </div>

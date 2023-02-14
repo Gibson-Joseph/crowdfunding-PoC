@@ -45,7 +45,7 @@ const CampaignDetails = () => {
         </div>
         <div className='flex md:w-[150px] w-full flex-wrap justify-between gap-[30px]'>
           <CountBox title="Days Left" value={remainingDays} />
-          <CountBox title={`Raised of ${state.target}`} value={state.amountCollected} />
+          <CountBox title={`Raised of ${state.target} ETH`} value={state.amountCollected} />
           <CountBox title="Total Backers" value={donators.length} />
         </div>
       </div>
@@ -53,7 +53,7 @@ const CampaignDetails = () => {
         <div className='flex-[2] flex flex-col gap-[40px]'>
           <div>
             <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">
-              Creators
+              Creator
             </h4>
             <div className='mt-[20px] flex flex-row items-center flex-wrap gap-[14px]'>
               <div className='w-[52px] h-[52px] flex items-center justify-center rounded-full bg-[#2c2f3d] cursor-pointer'>
@@ -61,7 +61,6 @@ const CampaignDetails = () => {
               </div>
               <div>
                 <h4 className='font-epilogue font-semibold text-[14px] text-white break-all'>{state.owner}</h4>
-                <p className='mt-[4px] font-epilogue font-normal text-[12px] text-[#808191]'>10 Campaigns</p>
               </div>
             </div>
           </div>
@@ -74,14 +73,15 @@ const CampaignDetails = () => {
             </div>
           </div>
           <div>
-            <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">
-              Donators
-            </h4>
             <div className='mt-[20px] flex flex-col gap-4'>
+              <div className='flex justify-between items-center gap-4'>
+                <h2 className="font-epilogue font-semibold text-[18px] text-white uppercase">Donators</h2>
+                <h2 className="font-epilogue font-semibold text-[18px] text-white uppercase">ETH Amounts</h2>
+              </div>
               {donators.length > 0 ? donators.map((item, index) => {
                 return <div key={`${item.donator}-${index}`} className='flex justify-between items-center gap-4'>
                   <p className='font-epilogue font-normal text-[16px] text-[#b2b3bd] leading-[26px] break-all'>{index + 1}. {item.donator}</p>
-                  <p className='font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] break-all'>{item.donation}</p>
+                  <p className='font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] break-all'>{item.donation} ETH</p>
                 </div>
               }) : (
                 <p className='font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] text-justify'>No donators yet. Be the first one!</p>
@@ -109,7 +109,7 @@ const CampaignDetails = () => {
                 <h4 className='font-epilogue font-semibold text-[14px] leading-[22px] text-white'>Back it because you belive it.</h4>
                 <p className='mt-[20px] font-epilogue font-normal leading-[22px] text-[#808191]'>Support the project for no reward, just because it speaks to you</p>
               </div>
-              <CustomButton disable={remainingDays <= 0 || state.amountCollected >= state.target} btyType="button" title="Fund Campaign" styles="w-full bg-[#8c6dfd]" handleClick={handleDonate} />
+              <CustomButton disable={remainingDays <= 0 || state.amountCollected >= state.target || !address || amount === ""} btyType="button" title="Fund Campaign" styles="w-full bg-[#8c6dfd]" handleClick={handleDonate} />
             </div>
           </div>
         </div>
