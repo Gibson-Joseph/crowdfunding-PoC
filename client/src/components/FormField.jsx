@@ -18,7 +18,7 @@ const FormField = ({
       {isTextArea ? (
         <textarea
           required
-          rows={10}
+          rows={5}
           value={value}
           placeholder={placeholder}
           onChange={handleChange}
