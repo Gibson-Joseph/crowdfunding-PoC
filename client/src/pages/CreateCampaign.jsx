@@ -34,6 +34,7 @@ const CreateCampaign = () => {
           target: ethers.utils.parseUnits(form.target, 18),
         }); // ( YT: 2:04:20)
         setIsLoading(false);
+        alert("Campaign created successfully");
         navigate("/");
       } else {
         alert("Provide valid image URL");
@@ -68,13 +69,6 @@ const CreateCampaign = () => {
         className="w-full mt-[65px] flex flex-col gap-[30px]"
       >
         <div className="flex flex-wrap gap-[40px]">
-          <FormField
-            lableName="Your Name *"
-            placeholder="Enter Name"
-            inputType="text"
-            value={form.name}
-            handleChange={(e) => handleFormFieldChange("name", e)} // check e
-          />
           <FormField
             lableName="Campaign Name *"
             placeholder="Write a Title"
