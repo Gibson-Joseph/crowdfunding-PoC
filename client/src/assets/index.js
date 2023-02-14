@@ -12,7 +12,7 @@ import menu from "./menu.svg";
 import money from "./money.svg";
 import loader from "./loader.svg";
 import thirdweb from "./thirdweb.png";
-import multiple_users from "./multiple_users.png";
+import multiDonator from "./multiDonator.png";
 import donator from "./donator.png";
 
 export {
@@ -30,6 +30,6 @@ export {
   money,
   loader,
   thirdweb,
-  multiple_users,
+  multiDonator,
   donator,
 };

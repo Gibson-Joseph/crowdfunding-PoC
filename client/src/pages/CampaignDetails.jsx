@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useStateContext } from "../context";
 import { CustomButton, CountBox, Loader } from "../components";
 import { calculateBarPercentage, daysLeft } from "../utils";
-import { donator } from "../assets";
+import { multiDonator, donator } from "../assets";
 
 const CampaignDetails = () => {
   const { state } = useLocation();
@@ -35,6 +35,7 @@ const CampaignDetails = () => {
       {isLoading && <Loader />}
       <div className="w-full flex md:flex-row flex-col mt-10 gap-[30px]">
         <div className="flex-1 flex-col">
+          <h2 className="font-epilogue text-white text-[25px] font-normal mb-2 uppercase">{state.title}</h2>
           <img
             src={state.image}
             alt="fund"
@@ -82,7 +83,7 @@ const CampaignDetails = () => {
               <div>
                 <h4 className="font-epilogue font-semibold text-[14px] text-white break-all">
                   Creator address :{" "}
-                  <span className="font-epilogue  font-semibold text-[#818183] ml-2 truncate">
+                  <span className="font-epilogue  font-semibold text-[#818183] ml-2 truncate whitespace-pre-wrap">
                     {state.owner}
                   </span>
                 </h4>
@@ -102,9 +103,14 @@ const CampaignDetails = () => {
           <div>
             <div className="mt-[20px] flex flex-col gap-4">
               <div className="flex justify-between items-center gap-4">
-                <h2 className="font-epilogue font-semibold text-[18px] text-white uppercase">
-                  Donators
-                </h2>
+                <div className="flex justify-center items-center">
+                  <div className="w-[42px] h-[42px] flex items-center justify-center rounded-full bg-[#2c2f3d]">
+                    <img src={multiDonator} alt="donators" className="w-[60%] h-[60%] object-contain " />
+                  </div>
+                  <h2 className="font-epilogue font-semibold text-[18px] text-white uppercase ml-2">
+                    Donators
+                  </h2>
+                </div>
                 <h2 className="font-epilogue font-semibold text-[18px] text-white uppercase">
                   ETH Amounts
                 </h2>
