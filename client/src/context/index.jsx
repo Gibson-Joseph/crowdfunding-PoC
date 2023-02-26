@@ -14,7 +14,8 @@ const StateContext = createContext();
 export const StateContextProvider = ({ children }) => {
   const { contract } = useContract(
     // "0xf5e79bC244e9151b0BeD75De0110262B29B08ABF",
-    "0xd75fF550669F227C26b9Bf1399101f6e206F6c4b",
+    // "0xd75fF550669F227C26b9Bf1399101f6e206F6c4b",
+    "0x9f8fDA315887481F7A46248ef92C1B4d55627A4b"
   ); // provide contract address of smart contract ( ThirdWeb )
 
   const { mutateAsync: createcampaign } = useContractWrite(
